@@ -11,7 +11,7 @@ abstract class AbstractClient extends GuzzleClient
         $this->apiKey = $apiKey;
 
         parent::__construct([
-            'base_url' => [static::URI . '/{version}/', ['version' => static::API_VERSION]],
+            'base_uri' => [static::URI . '/{version}/', ['version' => static::API_VERSION]],
             'defaults' => [
                 'headers' => ['Authorization' => 'Token ' . $apiKey],
             ]

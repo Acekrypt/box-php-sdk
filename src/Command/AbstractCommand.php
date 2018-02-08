@@ -1,7 +1,7 @@
 <?php namespace AdammBalogh\Box\Command;
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Message\Request;
+use GuzzleHttp\Psr7\Request;
 use \AdammBalogh\Box\Contract;
 
 /**
@@ -22,7 +22,7 @@ abstract class AbstractCommand implements Contract\CommandInterface
     public function execute(Client $client)
     {
         if (!$this->request instanceof Request) {
-            throw new \InvalidArgumentException('request is not an instanceof \GuzzleHttp\Message\Request');
+            throw new \InvalidArgumentException('request is not an instanceof \GuzzleHttp\Psr7\Request');
         }
 
         $this->copyClientDefaults($client);
@@ -43,7 +43,7 @@ abstract class AbstractCommand implements Contract\CommandInterface
      */
     protected function copyClientDefaults(Client $client)
     {
-        $this->request->setUrl($client->getBaseUrl() . $this->request->getUrl());
+        $this->request->setUri($client->getBaseUri() . $this->request->getUri());
         $this->request->addHeaders($client->getDefaultOption('headers'));
     }
 }

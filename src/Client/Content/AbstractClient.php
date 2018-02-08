@@ -1,6 +1,8 @@
 <?php namespace AdammBalogh\Box\Client\Content;
 
 use GuzzleHttp\Client as GuzzleClient;
+use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Handler\CurlHandler;
 
 abstract class AbstractClient extends GuzzleClient
 {
@@ -11,12 +13,25 @@ abstract class AbstractClient extends GuzzleClient
         $this->accessToken = $accessToken;
 
         parent::__construct([
-            'base_url' => [static::URI . '/{version}/', ['version' => static::API_VERSION]],
+            'base_uri' => static::URI . '/'.static::API_VERSION,
             'defaults' => [
                 'headers' => ['Authorization' => 'Bearer ' . $accessToken],
             ]
         ]);
     }
+
+    function add_header($header, $value)
+    {
+	    return function (callable $handler) use ($header, $value) {
+		    return function (
+				    RequestInterface $request,
+				    array $options
+				    ) use ($handler, $header, $value) {
+			    $request = $request->withHeader($header, $value);
+			    return $handler($request, $options);
+		    };
+	    };
+    }	
 
     public function getAccessToken()
     {

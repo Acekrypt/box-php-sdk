@@ -1,6 +1,7 @@
-<?php namespace AdammBalogh\Box\Response;
+<?php 
+namespace AdammBalogh\Box\Response;
 
-use GuzzleHttp\Message;
+use GuzzleHttp\Psr7\Response as GuzzleResponse;
 use AdammBalogh\Box\GuzzleHttp\Message\SuccessResponse;
 use AdammBalogh\Box\GuzzleHttp\Message\ErrorResponse;
 
@@ -16,7 +17,7 @@ class Response
      *
      * @throws \GuzzleHttp\Exception\ParseException
      */
-    public function __construct(Message\Response $response)
+    public function __construct(GuzzleResponse $response)
     {
         $this->response = $response;
     }

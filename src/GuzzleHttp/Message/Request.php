@@ -2,7 +2,7 @@
 
 use GuzzleHttp\Stream\Stream;
 
-class Request extends \GuzzleHttp\Message\Request
+class Request extends \GuzzleHttp\Psr7\Request
 {
     /**
      * @SuppressWarnings(PHPMD.StaticAccess)

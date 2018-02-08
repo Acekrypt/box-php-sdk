@@ -1,4 +1,6 @@
-<?php namespace AdammBalogh\Box\GuzzleHttp\Message;
+<?php 
+
+namespace AdammBalogh\Box\GuzzleHttp\Message;
 
 class GetRequest extends Request
 {
